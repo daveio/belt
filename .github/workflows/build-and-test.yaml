@@ -34,10 +34,6 @@ jobs:
         fail-on-cache-miss: false # optional, default is false
         # Check if a cache entry exists for the given input(s) (key, restore-keys) without downloading the cache
         lookup-only: false # optional, default is false
-    - name: Clean
-      run: |
-        rm -f target/debug/belt
-        rm -f target/debug/belt.d
     - name: Build
       run: cargo build --verbose
     - name: Test
