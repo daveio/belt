@@ -2,7 +2,7 @@
 //     Ok(tld)
 // }
 
-pub(crate) const WHOIS_SERVERS_JSON: &str = r#"
+pub(crate) const WHOIS_SERVERS_JSON: &str = r###"
   {
     "br.com": "whois.centralnic.net",
     "cn.com": "whois.centralnic.net",
@@ -786,4 +786,4 @@ pub(crate) const WHOIS_SERVERS_JSON: &str = r#"
       }
     }
   }
-"#;
+"###;
