@@ -1,6 +1,6 @@
-# belt
+# belt-book
 
-A collection of useful command-line utilities
+The Belt Book
 
 ## About
 
