@@ -2,6 +2,5 @@ mod whois;
 
 // use stuff
 fn main() {
-    let _ = whois::whois_toy_impl();
-    println!("{:?}", "fartbox");
+    whois::whois_toy_impl().expect("WHOIS toy implementation failed to run");
 }
