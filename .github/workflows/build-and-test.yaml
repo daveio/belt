@@ -17,40 +17,27 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Cache target/debug/build
+    - name: Cache
       uses: actions/cache@v3.3.2
       with:
         # A list of files, directories, and wildcard patterns to cache and restore
-        path: target/debug/build
+        path: target
         # An explicit key for restoring and saving the cache
-        key: daveio-belt-main-build
+        key: daveio-belt-main-target
         # An ordered list of keys to use for restoring stale cache if no cache hit occurred for key. Note `cache-hit` returns false in this case.
         # restore-keys: # optional
         # The chunk size used to split up large files during upload, in bytes
         # upload-chunk-size: # optional
         # An optional boolean when enabled, allows windows runners to save or restore caches that can be restored or saved respectively on other platforms
-        enableCrossOsArchive: true # optional, default is false
+        enableCrossOsArchive: false # optional, default is false
         # Fail the workflow if cache entry is not found
         fail-on-cache-miss: false # optional, default is false
         # Check if a cache entry exists for the given input(s) (key, restore-keys) without downloading the cache
         lookup-only: false # optional, default is false
-    - name: Cache target/debug/deps
-      uses: actions/cache@v3.3.2
-      with:
-        # A list of files, directories, and wildcard patterns to cache and restore
-        path: target/debug/deps
-        # An explicit key for restoring and saving the cache
-        key: daveio-belt-main-deps
-        # An ordered list of keys to use for restoring stale cache if no cache hit occurred for key. Note `cache-hit` returns false in this case.
-        # restore-keys: # optional
-        # The chunk size used to split up large files during upload, in bytes
-        # upload-chunk-size: # optional
-        # An optional boolean when enabled, allows windows runners to save or restore caches that can be restored or saved respectively on other platforms
-        enableCrossOsArchive: true # optional, default is false
-        # Fail the workflow if cache entry is not found
-        fail-on-cache-miss: false # optional, default is false
-        # Check if a cache entry exists for the given input(s) (key, restore-keys) without downloading the cache
-        lookup-only: false # optional, default is false
+    - name: Clean (Pass 1 of 2)
+      run: |
+        rm -f target/debug/belt
+        rm -f target/debug/belt.d
     - name: Build
       run: cargo build --verbose
     - name: Test
