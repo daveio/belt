@@ -38,4 +38,8 @@ jobs:
       run: cargo build --verbose
     - name: Test
       run: cargo test --verbose
-
+    - name: Archive
+      uses: actions/upload-artifact@v3
+      with:
+        name: binary
+        path: target/debug/belt
