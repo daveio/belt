@@ -13,3 +13,6 @@ book/
 
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
+
+# macOS nonsense
+**/.DS_Store
