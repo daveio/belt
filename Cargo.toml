@@ -11,7 +11,7 @@ chrono = "0.4.31"
 chrono-tz = "0.8.3"
 crossterm = { version = "0.27.0", features = ["event-stream"] }
 date_component = "0.4.1"
-ratatui = { version = "0.23.0", features = ["all-widgets"] }
+ratatui = { version = "0.25.0", features = ["all-widgets"] }
 tokio = "1.33.0"
 whois-rust = "1.5.2"
 whoisthere = "0.1.3"
