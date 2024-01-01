@@ -8,7 +8,7 @@ edition = "2021"
 [dependencies]
 anyhow = "1.0.75"
 chrono = "0.4.31"
-chrono-tz = "0.8.3"
+chrono-tz = "0.8.5"
 crossterm = { version = "0.27.0", features = ["event-stream"] }
 date_component = "0.4.1"
 ratatui = { version = "0.23.0", features = ["all-widgets"] }
