@@ -24,6 +24,7 @@ click = "^8.1.8"
 wireguard-tools = "^0.5.0"
 chevron = "^0.14.0"
 types-chevron = "^0.14.2.20240310"
+mutagen = "^1.47.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.31.0"

@@ -1,6 +1,7 @@
 import click
 
 from keypair import compose_keypair
+from audioinfo import compose_audioinfo
 from meta import version as mullvad_version
 
 
@@ -25,6 +26,11 @@ def version() -> None:
 )
 def keypair(print_script: bool) -> None:
     click.echo(compose_keypair(print_script))
+
+@cli.command()
+@click.argument('path', nargs=1, type=click.Path(), default=".")
+def audioinfo(path: click.Path) -> None:
+    click.echo(compose_audioinfo(path))
 
 
 if __name__ == "__main__":
