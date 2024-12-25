@@ -1,0 +1,31 @@
+import click
+
+from keypair import compose_keypair
+from meta import version as mullvad_version
+
+
+@click.group()
+def cli() -> None:
+    pass
+
+
+@cli.command()
+def version() -> None:
+    click.echo(f"belt {mullvad_version}")
+
+
+@cli.command()
+@click.option(
+    "-s",
+    "print_script",
+    is_flag=True,
+    show_default=True,
+    default=False,
+    help="Print keys for a script, as PRIVATEKEY PUBLICKEY",
+)
+def keypair(print_script: bool) -> None:
+    click.echo(compose_keypair(print_script))
+
+
+if __name__ == "__main__":
+    cli()
