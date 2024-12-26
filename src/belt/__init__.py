@@ -2,7 +2,7 @@ import click
 
 from keypair import compose_keypair
 from audioinfo import compose_audioinfo
-from meta import version as mullvad_version
+from meta import version
 
 
 @click.group()
@@ -12,7 +12,7 @@ def cli() -> None:
 
 @cli.command()
 def version() -> None:
-    click.echo(f"belt {mullvad_version}")
+    click.echo(f"belt {version}")
 
 
 @cli.command()
