@@ -9,7 +9,7 @@
 # the `language` matrix defined below to confirm you have the correct set of
 # supported CodeQL languages.
 #
-name: "CodeQL"
+name: "CodeQL Advanced"
 
 on:
   push:
@@ -17,7 +17,7 @@ on:
   pull_request:
     branches: [ "main" ]
   schedule:
-    - cron: '33 18 * * 3'
+    - cron: '22 8 * * 6'
 
 jobs:
   analyze:
@@ -27,7 +27,7 @@ jobs:
     #   - https://gh.io/supported-runners-and-hardware-resources
     #   - https://gh.io/using-larger-runners (GitHub.com only)
     # Consider using larger runners or machines with greater resources for possible analysis time improvements.
-    runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
+    runs-on: ${{ (matrix.language == 'swift' && 'macos-15') || 'ubuntu-24.04' }}
     permissions:
       # required for all workflows
       security-events: write
