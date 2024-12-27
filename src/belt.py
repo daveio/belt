@@ -6,13 +6,14 @@ from meta import version as belt_version
 
 
 @click.group()
+@click.version_option(version=belt_version)
 def cli() -> None:
     pass
 
 
 @cli.command()
 def version() -> None:
-    click.echo(f"belt {belt_version}")
+    click.echo(f"belt, version {belt_version}")
 
 
 @cli.command()
@@ -26,6 +27,7 @@ def version() -> None:
 )
 def keypair(print_script: bool) -> None:
     click.echo(compose_keypair(print_script))
+
 
 @cli.command()
 @click.argument('path', nargs=1, type=click.Path(), default=".")
