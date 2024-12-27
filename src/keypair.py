@@ -1,6 +1,5 @@
 from codecs import encode
 from textwrap import dedent
-from typing import Optional
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
@@ -15,9 +14,9 @@ class Keypair:
         return f"Keypair(private={self.private}, public={self.public})"
 
 
-def compose_keypair(print_script: bool) -> str:
+def compose_keypair(script: bool) -> str:
     keypair: Keypair = generate_keypair()
-    if print_script:
+    if script:
         return f"{keypair.private} {keypair.public}"
     return dedent(
         f"""
