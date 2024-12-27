@@ -14,19 +14,7 @@ class Keypair:
         return f"Keypair(private={self.private}, public={self.public})"
 
 
-def compose_keypair(script: bool) -> str:
-    keypair: Keypair = generate_keypair()
-    if script:
-        return f"{keypair.private} {keypair.public}"
-    return dedent(
-        f"""
-        Private key : {keypair.private}
-        Public key  : {keypair.public}
-        """
-    )
-
-
-def generate_keypair() -> Keypair:
+def make_keypair(script: bool) -> str:
     encoding: serialization.Encoding = serialization.Encoding.Raw
     priv_format: serialization.PrivateFormat = serialization.PrivateFormat.Raw
     pub_format: serialization.PublicFormat = serialization.PublicFormat.Raw
@@ -41,4 +29,12 @@ def generate_keypair() -> Keypair:
         encoding=encoding, format=pub_format
     )
     public_text: str = encode(public_bytes, "base64").decode("utf8").strip()
-    return Keypair(private_text, public_text)
+    keypair = Keypair(private_text, public_text)
+    if script:
+        return f"{keypair.private} {keypair.public}"
+    return dedent(
+        f"""
+        Private key : {keypair.private}
+        Public key  : {keypair.public}
+        """
+    )

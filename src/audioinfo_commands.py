@@ -29,7 +29,3 @@ def get_audioinfo(path: click.Path) -> str:
                     else:
                         out += f"{file_path}:{audio.info.sample_rate}:{audio.info.bits_per_sample}:{size}"
     return out
-
-
-def compose_audioinfo(path: click.Path) -> str:
-    return get_audioinfo(path)

@@ -1,8 +1,8 @@
 import click
 
-from audioinfo import compose_audioinfo
-from dns import dns_lookup
-from keypair import compose_keypair
+from audioinfo_commands import get_audioinfo
+from dns_commands import dns_lookup
+from keypair_commands import make_keypair
 from meta import version as belt_version
 
 
@@ -27,13 +27,13 @@ def version() -> None:
     help="Print keys for a script, as PRIVATEKEY PUBLICKEY",
 )
 def keypair(script: bool) -> None:
-    click.echo(compose_keypair(script))
+    click.echo(make_keypair(script))
 
 
 @cli.command()
 @click.argument("path", nargs=1, type=click.Path(), default=".")
 def audioinfo(path: click.Path) -> None:
-    click.echo(compose_audioinfo(path))
+    click.echo(get_audioinfo(path))
 
 
 @cli.group()
