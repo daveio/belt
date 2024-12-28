@@ -13,17 +13,17 @@ def audio_info(path: click.Path) -> None:
     for dirpath, _, filenames in os.walk(path):
         for filename in filenames:
             file_path = Path(os.path.join(dirpath, filename))
-            ext = file_path.suffix
+            ext = file_path.suffix.lower()
             if ext not in decoders:
                 pass
             else:
                 size = file_path.stat().st_size
-                decoder = decoders.get(ext.lower())
+                decoder = decoders.get(ext)
                 if decoder is None:
                     pass
                 else:
                     audio = decoder(file_path)
-                    if ext.lower() == ".mp3":
+                    if ext == ".mp3":
                         click.echo(f"{file_path}:{audio.info.sample_rate}:16:{size}")
                     else:
                         click.echo(

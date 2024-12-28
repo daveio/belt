@@ -52,7 +52,7 @@ def version() -> None:
 
 
 @audio.command()
-@click.argument("path", nargs=1, type=click.Path(), default=".")
+@click.argument("path", nargs=1, type=click.Path, default=".")
 def info(path: click.Path) -> None:
     click.echo(audio_info(path))
 
