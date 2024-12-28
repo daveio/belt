@@ -10,11 +10,11 @@ Python 3.12
 
 | Full flag               | Abbreviation  |
 | ----------------------- | ------------- |
-| `--config [FILE]`       | `-c [FILE]`   |
-| `--env-prefix [PREFIX]` | `-e [PREFIX]` |
+| `--config` `FILE`       | `-c` `FILE`   |
+| `--env-prefix` `PREFIX` | `-e` `PREFIX` |
 | `--help`                | `-h`          |
-| `--in [FILE]`           | `-i [FILE]`   |
-| `--out [FILE]`          | `-o [FILE]`   |
+| `--in` `FILE`           | `-i` `FILE`   |
+| `--out` `FILE`          | `-o` `FILE`   |
 | `--verbose`             | `-v`          |
 | `--version`             | `-V`          |
 
