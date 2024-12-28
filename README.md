@@ -1,4 +1,4 @@
-# belt: a cli toolbox
+# `belt`: a cli toolbox
 
 ## Language
 
