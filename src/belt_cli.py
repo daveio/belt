@@ -11,12 +11,11 @@ from crypt_commands import (
 )
 from dns_commands import dns_flush, dns_lookup, dns_sec
 from domain_commands import domain_expiry, domain_ns
-from meta import version as belt_version
 from tls_commands import tls_cert_req, tls_cert_selfsign, tls_ciphers
 
 
 @click.group()
-@click.version_option(version=belt_version)
+@click.version_option()
 def cli() -> None:
     pass
 
@@ -46,13 +45,8 @@ def tls() -> None:
     pass
 
 
-@cli.command()
-def version() -> None:
-    click.echo(f"belt, version {belt_version}")
-
-
 @audio.command()
-@click.argument("path", nargs=1, type=click.Path, default=".")
+@click.argument("path", nargs=1, type=click.Path(), default=".")
 def info(path: click.Path) -> None:
     click.echo(audio_info(path))
 
