@@ -9,7 +9,7 @@ from mutagen.mp4 import MP4
 decoders = {".flac": FLAC, ".mp3": MP3, ".m4a": MP4}
 
 
-def get_audioinfo(path: click.Path) -> str:
+def audio_info(path: click.Path) -> str:
     out = ""
     for dirpath, _, filenames in os.walk(path):
         for filename in filenames:
@@ -25,7 +25,7 @@ def get_audioinfo(path: click.Path) -> str:
                 else:
                     audio = decoder(file_path)
                     if ext.lower() == ".mp3":
-                        out += f"{file_path}:{audio.info.sample_rate}:16:{size}"
+                        out += f"{file_path}:{audio.info.sample_rate}:16:{size}\n"
                     else:
-                        out += f"{file_path}:{audio.info.sample_rate}:{audio.info.bits_per_sample}:{size}"
+                        out += f"{file_path}:{audio.info.sample_rate}:{audio.info.bits_per_sample}:{size}\n"
     return out

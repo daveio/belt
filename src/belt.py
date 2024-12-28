@@ -1,16 +1,28 @@
 import click
 
-from audioinfo_commands import get_audioinfo
-from crypt_commands import crypt_rand, crypt_simple, crypt_wireguard
+from audio_commands import audio_info
+from crypt_commands import (
+    crypt_rand_char,
+    crypt_rand_hex,
+    crypt_rand_pw,
+    crypt_simple_dec,
+    crypt_simple_enc,
+    crypt_wireguard,
+)
 from dns_commands import dns_flush, dns_lookup, dns_sec
 from domain_commands import domain_expiry, domain_ns
 from meta import version as belt_version
-from tls_commands import tls_cert, tls_ciphers
+from tls_commands import tls_cert_req, tls_cert_selfsign, tls_ciphers
 
 
 @click.group()
 @click.version_option(version=belt_version)
 def cli() -> None:
+    pass
+
+
+@cli.group()
+def audio() -> None:
     pass
 
 
@@ -39,20 +51,45 @@ def version() -> None:
     click.echo(f"belt, version {belt_version}")
 
 
-@cli.command()
+@audio.command()
 @click.argument("path", nargs=1, type=click.Path(), default=".")
-def audioinfo(path: click.Path) -> None:
-    click.echo(get_audioinfo(path))
+def info(path: click.Path) -> None:
+    click.echo(audio_info(path))
 
 
-@crypt.command()
+@crypt.group()
 def rand() -> None:  # DevSkim: ignore DS148264
-    click.echo(crypt_rand())
+    pass
 
 
-@crypt.command()
+@rand.command()
+def char() -> None:
+    click.echo(crypt_rand_char())
+
+
+@rand.command()
+def hex() -> None:
+    click.echo(crypt_rand_hex())
+
+
+@rand.command()
+def pw() -> None:
+    click.echo(crypt_rand_pw())
+
+
+@crypt.group()
 def simple() -> None:
-    click.echo(crypt_simple())
+    pass
+
+
+@simple.command()
+def dec() -> None:
+    click.echo(crypt_simple_dec())
+
+
+@simple.command()
+def enc() -> None:
+    click.echo(crypt_simple_enc())
 
 
 @crypt.command()
@@ -99,9 +136,19 @@ def ns() -> None:
     click.echo(domain_ns())
 
 
-@tls.command()
+@tls.group()
 def cert() -> None:
-    click.echo(tls_cert())
+    pass
+
+
+@cert.command()
+def selfsign() -> None:
+    click.echo(tls_cert_selfsign())
+
+
+@cert.command()
+def req() -> None:
+    click.echo(tls_cert_req())
 
 
 @tls.command()
