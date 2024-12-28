@@ -14,15 +14,7 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 keywords = []
-packages = [
-  { include = "belt_cli", from = "src" },
-  { include = "meta", from = "src" },
-  { include = "audio_commands", from = "src" },
-  { include = "crypt_commands", from = "src" },
-  { include = "dns_commands", from = "src" },
-  { include = "domain_commands", from = "src" },
-  { include = "tls_commands", from = "src" },
-]
+packages = [{ include = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
