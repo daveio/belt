@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "belt-cli"
-version = "0.1.1"
+version = "0.1.2"
 description = "CLI toolbelt"
 authors = ["Dave Williams <dave@dave.io>"]
 license = "MIT"
@@ -14,7 +14,15 @@ classifiers = [
   "Programming Language :: Python :: Implementation :: PyPy",
 ]
 keywords = []
-packages = []
+packages = [
+  { include = "belt_cli", from = "src" },
+  { include = "meta", from = "src" },
+  { include = "audio_commands", from = "src" },
+  { include = "crypt_commands", from = "src" },
+  { include = "dns_commands", from = "src" },
+  { include = "domain_commands", from = "src" },
+  { include = "tls_commands", from = "src" },
+]
 
 [tool.poetry.dependencies]
 python = "^3.12"
