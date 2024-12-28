@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
 
 
-class Keypair:
+class WireguardKeypair:
     def __init__(self, private: str, public: str) -> None:
         self.private: str = private
         self.public: str = public
@@ -14,7 +14,15 @@ class Keypair:
         return f"Keypair(private={self.private}, public={self.public})"
 
 
-def make_keypair(script: bool) -> str:
+def crypt_rand() -> str:
+    return "crypt_rand: Not yet implemented"
+
+
+def crypt_simple() -> str:
+    return "crypt_simple: Not yet implemented"
+
+
+def crypt_wireguard(script: bool) -> str:
     encoding: serialization.Encoding = serialization.Encoding.Raw
     priv_format: serialization.PrivateFormat = serialization.PrivateFormat.Raw
     pub_format: serialization.PublicFormat = serialization.PublicFormat.Raw
@@ -29,7 +37,7 @@ def make_keypair(script: bool) -> str:
         encoding=encoding, format=pub_format
     )
     public_text: str = encode(public_bytes, "base64").decode("utf8").strip()
-    keypair = Keypair(private_text, public_text)
+    keypair = WireguardKeypair(private_text, public_text)
     if script:
         return f"{keypair.private} {keypair.public}"
     return dedent(
