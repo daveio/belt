@@ -38,7 +38,7 @@ concurrency:
 jobs:
   megalinter:
     name: MegaLinter
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     # Give the default GITHUB_TOKEN write permission to commit and push, comment
     # issues, and post new Pull Requests; remove the ones you do not need
@@ -50,7 +50,7 @@ jobs:
     steps:
       # Git Checkout
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
         with:
           token: ${{ secrets.PAT || secrets.GITHUB_TOKEN }}
 
@@ -101,7 +101,7 @@ jobs:
 
       # Upload MegaLinter artifacts
       - name: Archive production artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4.5.0
         if: success() || failure()
         with:
           name: MegaLinter reports
@@ -112,7 +112,7 @@ jobs:
       # Create pull request if applicable
       # (for now works only on PR from same repository, not from forks)
       - name: Create Pull Request with applied fixes
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7.0.6
         id: cpr
         if: >-
           steps.ml.outputs.has_updated_sources == 1 &&
@@ -168,7 +168,7 @@ jobs:
         run: sudo chown -Rc $UID .git/
 
       - name: Commit and push applied linter fixes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v5.0.1
         if: >-
           steps.ml.outputs.has_updated_sources == 1 &&
           (
