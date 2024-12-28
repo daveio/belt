@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "belt"
+name = "belt-cli"
 version = "0.1.0"
 description = "CLI toolbelt"
 authors = ["Dave Williams <dave@dave.io>"]
@@ -36,4 +36,4 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-belt = 'belt:cli'
+belt = 'belt-cli:cli'
