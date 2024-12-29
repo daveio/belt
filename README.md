@@ -10,11 +10,11 @@ Format: `JSON`
 
 Path: `~/.config/belt/config.json`
 
-| Group | Key        | Type | Description                                           |
-| ----- | ---------- | ---- | ----------------------------------------------------- |
-| crypt | env        | str  | Environment variable to use for encryption passphrase |
-| crypt | passphrase | str  | Default passphrase for encryption                     |
-| dns   | server     | str  | Default DNS server to use for lookups                 |
+| Group   | Key          | Type  | Description                                           |
+| ------- | ------------ | ----- | ----------------------------------------------------- |
+| `crypt` | `env`        | `str` | Environment variable to use for encryption passphrase |
+| `crypt` | `passphrase` | `str` | Default passphrase for encryption                     |
+| `dns`   | `server`     | `str` | Default DNS server to use for lookups                 |
 
 ```json
 {
