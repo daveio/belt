@@ -4,6 +4,29 @@
 
 Python 3.12
 
+## Config file
+
+Format: `JSON`
+Path: `~/.config/belt/config.json`
+
+| Group | Key        | Type | Description                                           |
+| ----- | ---------- | ---- | ----------------------------------------------------- |
+| crypt | env        | str  | Environment variable to use for encryption passphrase |
+| crypt | passphrase | str  | Default passphrase for encryption                     |
+| dns   | server     | str  | Default DNS server to use for lookups                 |
+
+```json
+{
+  "crypt": {
+    "env": "ENV_VAR"
+    "passphrase": "default passphrase",
+  },
+  "dns": {
+    "server": "1.1.1.1"
+  }
+}
+```
+
 ## Args and flags
 
 ### Universal flags
@@ -20,24 +43,24 @@ Python 3.12
 
 ### Functionality selection
 
-| Command  | Subcommand  | Function   | Positional           | Params                                      |
-| -------- | ----------- | ---------- | -------------------- | ------------------------------------------- |
-| `audio`  | `info`      |            |                      |                                             |
-| `crypt`  | `rand`      | `char`     | `LENGTH`             |                                             |
-| `crypt`  | `rand`      | `hex`      | `LENGTH`             |                                             |
-| `crypt`  | `rand`      | `pw`       | `LENGTH`             |                                             |
-| `crypt`  | `simple`    | `dec`      |                      | `-e`, `--env` `VAR` Use passphrase from env |
-| `crypt`  | `simple`    | `enc`      |                      | `-e`, `--env` `VAR` Use passphrase from env |
-| `crypt`  | `wireguard` |            |                      |                                             |
-| `dns`    | `flush`     |            |                      |                                             |
-| `dns`    | `lookup`    |            | `QUERY [RECORDTYPE]` | `-s`, `--server` `HOSTNAME` Use server      |
-|          |             |            |                      | `-r`, `--root` Use root servers             |
-| `dns`    | `sec`       |            | `DOMAIN.TLD`         |                                             |
-| `tls`    | `cert`      | `req`      | `COMMONNAME`         | `-c`, `--client` Request client cert        |
-| `tls`    | `cert`      | `selfsign` | `COMMONNAME`         | `-c`, `--client` Generate client cert       |
-| `tls`    | `ciphers`   |            | `HOSTNAME` `PORT`    |                                             |
-| `domain` | `expiry`    |            | `DOMAIN.TLD`         |                                             |
-| `domain` | `ns`        |            | `DOMAIN.TLD`         |                                             |
+| Command  | Subcommand  | Function   | Positional        | Params                                      |
+| -------- | ----------- | ---------- | ----------------- | ------------------------------------------- |
+| `audio`  | `info`      |            |                   |                                             |
+| `crypt`  | `rand`      | `char`     | `LENGTH`          |                                             |
+| `crypt`  | `rand`      | `hex`      | `LENGTH`          |                                             |
+| `crypt`  | `rand`      | `pw`       | `LENGTH`          |                                             |
+| `crypt`  | `simple`    | `dec`      |                   | `-e`, `--env` `VAR` Use passphrase from env |
+| `crypt`  | `simple`    | `enc`      |                   | `-e`, `--env` `VAR` Use passphrase from env |
+| `crypt`  | `wireguard` |            |                   |                                             |
+| `dns`    | `flush`     |            |                   |                                             |
+| `dns`    | `lookup`    |            | `QUERY`           | `-s`, `--server` `HOSTNAME` Use server      |
+|          |             |            | `[RECORDTYPE]`    | `-r`, `--root` Use root servers             |
+| `dns`    | `sec`       |            | `DOMAIN.TLD`      |                                             |
+| `tls`    | `cert`      | `req`      | `COMMONNAME`      | `-c`, `--client` Request client cert        |
+| `tls`    | `cert`      | `selfsign` | `COMMONNAME`      | `-c`, `--client` Generate client cert       |
+| `tls`    | `ciphers`   |            | `HOSTNAME` `PORT` |                                             |
+| `domain` | `expiry`    |            | `DOMAIN.TLD`      |                                             |
+| `domain` | `ns`        |            | `DOMAIN.TLD`      |                                             |
 
 ## Features
 
