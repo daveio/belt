@@ -7,6 +7,7 @@ Python 3.12
 ## Config file
 
 Format: `JSON`
+
 Path: `~/.config/belt/config.json`
 
 | Group | Key        | Type | Description                                           |
