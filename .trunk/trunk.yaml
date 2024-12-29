@@ -17,6 +17,7 @@ runtimes:
 # This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
 lint:
   enabled:
+    - hadolint@2.12.1-beta
     - actionlint@1.7.4
     - bandit@1.8.0
     - black@24.10.0
