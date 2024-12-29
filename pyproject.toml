@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "belt-cli"
-version = "0.1.5"
+version = "0.1.6"
 description = "CLI toolbelt"
 authors = ["Dave Williams <dave@dave.io>"]
 license = "MIT"
