@@ -27,6 +27,8 @@ chevron = "^0.14.0"
 types-chevron = "^0.14.2.20240310"
 mutagen = "^1.47.0"
 dnspython = "^2.7.0"
+tink = "^1.10.0"
+showcert = "^0.2.12"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.31.0"
