@@ -49,7 +49,9 @@ Path: `~/.config/belt/config.json`
 | `audio`  | `info`      |            |                   |                                             |
 | `crypt`  | `rand`      | `char`     | `LENGTH`          |                                             |
 | `crypt`  | `rand`      | `hex`      | `LENGTH`          |                                             |
-| `crypt`  | `rand`      | `pw`       | `LENGTH`          |                                             |
+| `crypt`  | `rand`      | `pw`       | `LENGTH`          | `-n`, `--numbers` Add numbers               |
+|          |             |            |                   | `-s`, `--symbols` Add symbols               |
+|          |             |            |                   | `-c`, `--chbs` Use xkcd format              |
 | `crypt`  | `simple`    | `dec`      |                   | `-e`, `--env` `VAR` Use passphrase from env |
 | `crypt`  | `simple`    | `enc`      |                   | `-e`, `--env` `VAR` Use passphrase from env |
 | `crypt`  | `wireguard` |            |                   |                                             |
