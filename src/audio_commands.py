@@ -10,6 +10,17 @@ decoders = {".flac": FLAC, ".mp3": MP3, ".m4a": MP4}
 
 
 def audio_info(path: click.Path) -> None:
+    """
+    This function walks through a directory and its subdirectories,
+    identifies audio files, and prints their file paths, sample rates,
+    bits per sample, and file sizes.
+
+    Parameters:
+    path (click.Path): The root directory to start the search.
+
+    Returns:
+    None: The function does not return any value. It prints the audio file information.
+    """
     for dirpath, _, filenames in os.walk(path):
         for filename in filenames:
             file_path = Path(os.path.join(dirpath, filename))

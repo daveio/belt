@@ -19,6 +19,7 @@ packages = [{ include = "*.py", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+poetry = "1.8.5"
 requests = "^2.32.3"
 cryptography = "^44.0.0"
 click = "^8.1.8"
