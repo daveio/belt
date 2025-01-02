@@ -28,6 +28,8 @@ types-chevron = "^0.14.2.20240310"
 mutagen = "^1.47.0"
 dnspython = "^2.7.0"
 showcert = "^0.2.12"
+colorama = "^0.4.6"
+putio-py = "^8.7.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.31.0"

@@ -747,6 +747,21 @@ files = [
 tests = ["pytest"]
 
 [[package]]
+name = "putio-py"
+version = "8.7.0"
+description = "Python client for put.io API v2"
+optional = false
+python-versions = "*"
+files = [
+    {file = "putio.py-8.7.0.tar.gz", hash = "sha256:ecfbedeada74a2c7540a665c4d5b9bb147b32fbdb90c40149e65b3786f0e7300"},
+]
+
+[package.dependencies]
+requests = "*"
+six = "*"
+"tus.py" = "*"
+
+[[package]]
 name = "pycparser"
 version = "2.22"
 description = "C parser in Python"
@@ -909,6 +924,19 @@ docs = ["myst-parser", "pydata-sphinx-theme", "sphinx"]
 test = ["argcomplete (>=3.0.3)", "mypy (>=1.7.0)", "pre-commit", "pytest (>=7.0,<8.2)", "pytest-mock", "pytest-mypy-testing"]
 
 [[package]]
+name = "tus-py"
+version = "1.3.4"
+description = "tus (resumable file upload protocol) client"
+optional = false
+python-versions = "*"
+files = [
+    {file = "tus.py-1.3.4.tar.gz", hash = "sha256:b80feda87700aae629eb19dd98cec68ae520cd9b2aa24bd0bab2b777be0b4366"},
+]
+
+[package.dependencies]
+requests = "*"
+
+[[package]]
 name = "types-chevron"
 version = "0.14.2.20240310"
 description = "Typing stubs for chevron"
@@ -977,4 +1005,4 @@ segno = ">=1.5.2,<2.0.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "f1ea7661ab1f419747eb580f35f7ffe35de08215b9a348d00d16f199da6bec0f"
+content-hash = "ece1773b28bba099897eb667a411479af763865425f981b4a159c11538d8269e"
