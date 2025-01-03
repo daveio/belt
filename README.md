@@ -6,26 +6,24 @@ Python 3.12
 
 ## Config file
 
-Format: `JSON`
+Format: `YAML`
 
 Path: `~/.config/belt/config.json`
 
-| Group   | Key          | Type  | Description                                           |
-| ------- | ------------ | ----- | ----------------------------------------------------- |
-| `crypt` | `env`        | `str` | Environment variable to use for encryption passphrase |
-| `crypt` | `passphrase` | `str` | Default passphrase for encryption                     |
-| `dns`   | `server`     | `str` | Default DNS server to use for lookups                 |
+| Group   | Key      | Type   | Description                                                                 |
+| ------- | -------- | ------ | --------------------------------------------------------------------------- |
+| `crypt` | `env`    | `str`  | Environment variable to use for encryption key                              |
+| `crypt` | `key`    | `str`  | Default key for encryption/decryption (if `crypt -> env` is empty or unset) |
+| `dns`   | `server` | `str`  | Default DNS server to use for lookups                                       |
+| `dns`   | `root`   | `bool` | Use root servers directly for lookups                                       |
 
-```json
-{
-  "crypt": {
-    "env": "ENV_VAR"
-    "passphrase": "default passphrase",
-  },
-  "dns": {
-    "server": "1.1.1.1"
-  }
-}
+```yaml
+crypt:
+  env: BELT_CRYPT_KEY
+  key: ELYkrte99XWbLWJckwxLHz2XZzF1mn57JsDBKX43QlQ=
+dns:
+  server: 1.1.1.1
+  root: false
 ```
 
 ## Args and flags

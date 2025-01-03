@@ -20,6 +20,11 @@ def cli() -> None:
     pass
 
 
+# @cli.command()
+# def test() -> None:
+#     click.echo(get_config())
+
+
 @cli.group()
 def audio() -> None:
     pass

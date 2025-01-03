@@ -37,7 +37,7 @@ jobs:
     environment:
       name: pypi
       url: https://pypi.org/p/belt-cli
-    permissions: # trunk-ignore(checkov/CKV2_GHA_1)
+    permissions:
       id-token: write # IMPORTANT: mandatory for trusted publishing
     steps:
       - name: Download dists
