@@ -1656,13 +1656,13 @@ requests = "*"
 
 [[package]]
 name = "types-chevron"
-version = "0.14.2.20240310"
+version = "0.14.2.20250103"
 description = "Typing stubs for chevron"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "types-chevron-0.14.2.20240310.tar.gz", hash = "sha256:01e33dea521a369ca36669db44d42ccd355287edb432cd5ebe985297bce50505"},
-    {file = "types_chevron-0.14.2.20240310-py3-none-any.whl", hash = "sha256:3583ccabdf11fbcabad48f26cda8814f3983b238635736c5bd02aa2fce196820"},
+    {file = "types_chevron-0.14.2.20250103-py3-none-any.whl", hash = "sha256:b255b2a71d83d9c548183d4eeadea874fbaec64b09f00d3bf3f43d3731c1c255"},
+    {file = "types_chevron-0.14.2.20250103.tar.gz", hash = "sha256:9dacdc9b01bdf717bcb7930f0602b9b74add054ebf3cf38d282b7e2b64c9d076"},
 ]
 
 [[package]]
@@ -1816,4 +1816,4 @@ test = ["pytest"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "664bee17881c07ceb78d162676c0d113cd21053207b48dae6efe26851a9719e9"
+content-hash = "e52acb3c3e3187520c190fe51f545d5592f7730830c350fef5fb7fc2d04ece21"
