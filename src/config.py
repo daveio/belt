@@ -1,3 +1,4 @@
+from os import getenv
 from pathlib import Path
 from textwrap import dedent
 
@@ -56,8 +57,17 @@ def get_config() -> dict:
             config["crypt"]["warned"] = yaml["crypt"]["warned"]
         else:
             config["crypt"]["warned"] = False
+        # if yaml["crypt"].get("passphrase"):
+        #     config["crypt"]["passphrase"] = yaml["crypt"]["passphrase"]
+        # else:
+        #     config["crypt"]["passphrase"] = False
     else:
-        config["crypt"] = {"env": None, "key": None, "warned": False}
+        config["crypt"] = {
+            "env": None,
+            "key": None,
+            "warned": False,
+            # "passphrase": False,
+        }
 
     if yaml.get("dns"):
         config["dns"] = {}
@@ -75,6 +85,15 @@ def get_config() -> dict:
     return config
 
 
-def crypt_key() -> str:
-    # check configured env var, otherwise use key from config
-    return "not yet implemented"
+def get_crypt() -> Fernet:
+    config = get_config()
+    if config.get("crypt"):
+        if config.get("crypt").get("env"):
+            env = getenv(config["crypt"]["env"])
+            if env:
+                return Fernet(env)
+            else:
+                key = config.get("crypt").get("key")
+                if key:
+                    return Fernet(key)
+    return None
