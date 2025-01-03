@@ -14,6 +14,7 @@ Path: `~/.config/belt/config.json`
 | ------- | -------- | ------ | --------------------------------------------------------------------------- |
 | `crypt` | `env`    | `str`  | Environment variable to use for encryption key                              |
 | `crypt` | `key`    | `str`  | Default key for encryption/decryption (if `crypt -> env` is empty or unset) |
+| `crypt` | `warned` | `bool` | Whether the user has been warned about the consequences of losing the key   |
 | `dns`   | `server` | `str`  | Default DNS server to use for lookups                                       |
 | `dns`   | `root`   | `bool` | Use root servers directly for lookups                                       |
 
@@ -21,6 +22,7 @@ Path: `~/.config/belt/config.json`
 crypt:
   env: BELT_CRYPT_KEY
   key: ELYkrte99XWbLWJckwxLHz2XZzF1mn57JsDBKX43QlQ=
+  warned: false
 dns:
   server: 1.1.1.1
   root: false

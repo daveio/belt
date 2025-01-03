@@ -22,6 +22,7 @@ def get_config() -> dict:
                     # crypt:
                     #   env:    # Environment variable to use for generating random passwords
                     #   key:    # Key to use for encryption/decryption
+                    #   warned: # Whether the user has been warned about the consequences of losing the key
                     # dns:
                     #   server: # DNS server to use for DNS lookups
                     #   root:   # Whether to use root servers directly for DNS lookups
@@ -29,6 +30,7 @@ def get_config() -> dict:
                     crypt:
                         env: BELT_CRYPT_KEY
                         key: {Fernet.generate_key().decode()}
+                        warned: false
                     dns:
                         server: 1.1.1.1
                         root: false
@@ -50,8 +52,12 @@ def get_config() -> dict:
             config["crypt"]["key"] = yaml["crypt"]["key"]
         else:
             config["crypt"]["key"] = None
+        if yaml["crypt"].get("warned"):
+            config["crypt"]["warned"] = yaml["crypt"]["warned"]
+        else:
+            config["crypt"]["warned"] = False
     else:
-        config["crypt"] = {"env": None, "key": None}
+        config["crypt"] = {"env": None, "key": None, "warned": False}
 
     if yaml.get("dns"):
         config["dns"] = {}
