@@ -59,6 +59,7 @@ dns:
 | `dns`    | `lookup`    |            | `QUERY`        | `-s`, `--server` `HOSTNAME` Use server |
 |          |             |            | `[RECORDTYPE]` | `-r`, `--root` Use root servers        |
 | `dns`    | `sec`       |            | `DOMAIN.TLD`   |                                        |
+| `init`   |             |            |                |                                        |
 | `tls`    | `cert`      | `req`      | `COMMONNAME`   | `-c`, `--client` Request client cert   |
 | `tls`    | `cert`      | `selfsign` | `COMMONNAME`   | `-c`, `--client` Generate client cert  |
 | `tls`    | `ciphers`   |            | `HOSTNAME`     |                                        |
