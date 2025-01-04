@@ -30,7 +30,7 @@ def get_config() -> dict:
                     #
                     crypt:
                         env: BELT_CRYPT_KEY
-                        key: {str(x25519.Identity().generate())}
+                        key: {str(x25519.Identity.generate())}
                         warned: false
                     dns:
                         server: 1.1.1.1
