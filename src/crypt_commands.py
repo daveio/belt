@@ -14,24 +14,28 @@ class WireguardKeypair:
         return f"Keypair(private={self.private}, public={self.public})"
 
 
-def crypt_rand_char() -> str:
-    return "crypt_rand_char: Not yet implemented"
+def crypt_generate_key() -> str:
+    return "crypt_generate_key: Not yet implemented"
 
 
-def crypt_rand_hex() -> str:
-    return "crypt_rand_hex: Not yet implemented"
+def crypt_random_char() -> str:
+    return "crypt_random_char: Not yet implemented"
 
 
-def crypt_rand_pw() -> str:
-    return "crypt_rand_pw: Not yet implemented"
+def crypt_random_hex() -> str:
+    return "crypt_random_hex: Not yet implemented"
 
 
-def crypt_simple_enc() -> str:
-    return "crypt_simple_enc: Not yet implemented"
+def crypt_random_pw() -> str:
+    return "crypt_random_pw: Not yet implemented"
 
 
-def crypt_simple_dec() -> str:
-    return "crypt_simple_dec: Not yet implemented"
+def crypt_simple_encrypt() -> str:
+    return "crypt_simple_encrypt: Not yet implemented"
+
+
+def crypt_simple_decrypt() -> str:
+    return "crypt_simple_decrypt: Not yet implemented"
 
 
 def crypt_wireguard(script: bool) -> str:

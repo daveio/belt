@@ -6,11 +6,12 @@ from pytz import timezone
 from audio_commands import audio_info
 from config import get_crypt
 from crypt_commands import (
-    crypt_rand_char,
-    crypt_rand_hex,
-    crypt_rand_pw,
-    crypt_simple_dec,
-    crypt_simple_enc,
+    crypt_generate_key,
+    crypt_random_char,
+    crypt_random_hex,
+    crypt_random_pw,
+    crypt_simple_decrypt,
+    crypt_simple_encrypt,
     crypt_wireguard,
 )
 from dns_commands import dns_flush, dns_lookup, dns_sec
@@ -69,23 +70,33 @@ def info(path: click.Path) -> None:
 
 
 @crypt.group()
-def rand() -> None:  # DevSkim: ignore DS148264
+def generate() -> None:
     pass
 
 
-@rand.command()
+@generate.command()
+def key() -> None:
+    click.echo(crypt_generate_key())
+
+
+@crypt.group()
+def random() -> None:  # DevSkim: ignore DS148264
+    pass
+
+
+@random.command()
 def char() -> None:
-    click.echo(crypt_rand_char())
+    click.echo(crypt_random_char())
 
 
-@rand.command()
+@random.command()
 def hex() -> None:
-    click.echo(crypt_rand_hex())
+    click.echo(crypt_random_hex())
 
 
-@rand.command()
+@random.command()
 def pw() -> None:
-    click.echo(crypt_rand_pw())
+    click.echo(crypt_random_pw())
 
 
 @crypt.group()
@@ -95,12 +106,12 @@ def simple() -> None:
 
 @simple.command()
 def dec() -> None:
-    click.echo(crypt_simple_dec())
+    click.echo(crypt_simple_decrypt())
 
 
 @simple.command()
 def enc() -> None:
-    click.echo(crypt_simple_enc())
+    click.echo(crypt_simple_encrypt())
 
 
 @crypt.command()
