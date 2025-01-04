@@ -21,7 +21,8 @@ def get_config() -> dict:
                     # Example configuration file for Belt
                     #
                     # crypt:
-                    #   env:    # Environment variable to use for generating random passwords
+                    #   env:    # Environment variable containing the key to use for encryption/decryption
+                    #           # This supercedes any key specified in the 'key' field
                     #   key:    # Key to use for encryption/decryption
                     #   warned: # Whether the user has been warned about the consequences of losing the key
                     # dns:
@@ -57,17 +58,8 @@ def get_config() -> dict:
             config["crypt"]["warned"] = yaml["crypt"]["warned"]
         else:
             config["crypt"]["warned"] = False
-        # if yaml["crypt"].get("passphrase"):
-        #     config["crypt"]["passphrase"] = yaml["crypt"]["passphrase"]
-        # else:
-        #     config["crypt"]["passphrase"] = False
     else:
-        config["crypt"] = {
-            "env": None,
-            "key": None,
-            "warned": False,
-            # "passphrase": False,
-        }
+        config["crypt"] = {"env": None, "key": None, "warned": False}
 
     if yaml.get("dns"):
         config["dns"] = {}
