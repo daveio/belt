@@ -36,6 +36,7 @@ pyxdg = "^0.28"
 betterconf = "^4.2.0"
 pytz = "^2024.2"
 pycryptodome = "^3.21.0"
+pyrage = "^1.2.3"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.31.0"
