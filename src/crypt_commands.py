@@ -49,10 +49,10 @@ def crypt_simple_decrypt() -> None:
 
 
 def crypt_wireguard(script: bool) -> str:
-    encoding: serialization.Encoding = serialization.Encoding.Raw
-    priv_format: serialization.PrivateFormat = serialization.PrivateFormat.Raw
-    pub_format: serialization.PublicFormat = serialization.PublicFormat.Raw
-    private_key: X25519PrivateKey = X25519PrivateKey.generate()
+    encoding = serialization.Encoding.Raw
+    priv_format = serialization.PrivateFormat.Raw
+    pub_format = serialization.PublicFormat.Raw
+    private_key = X25519PrivateKey.generate()
     private_bytes: bytes = private_key.private_bytes(
         encoding=encoding,
         format=priv_format,
