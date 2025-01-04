@@ -90,7 +90,7 @@ def get_key() -> x25519.Identity:
     env = config.get("crypt").get("env")
     if env:
         key = getenv(env)
-    else:
+    if key is None:
         key = config.get("crypt").get("key")
     if key:
         return x25519.Identity.from_str(key)

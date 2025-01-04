@@ -36,7 +36,7 @@ def crypt_simple_encrypt() -> str:
     key = get_key()
     plaintext = stdin.buffer.read()
     ciphertext = encrypt(plaintext, [key.to_public()])
-    stdout.write(b64encode(ciphertext).decode("utf-8"))
+    return b64encode(ciphertext).decode("utf-8")
 
 
 def crypt_simple_decrypt() -> None:
@@ -45,6 +45,7 @@ def crypt_simple_decrypt() -> None:
     ciphertext = b64decode(cipherb64)
     plaintext = decrypt(ciphertext, [key])
     stdout.buffer.write(plaintext)
+    stdout.flush()
 
 
 def crypt_wireguard(script: bool) -> str:

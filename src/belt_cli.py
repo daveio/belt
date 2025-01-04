@@ -88,7 +88,7 @@ def decrypt() -> None:
 
 @simple.command()
 def encrypt() -> None:
-    crypt_simple_encrypt()
+    click.echo(crypt_simple_encrypt())
 
 
 @crypt.command()
