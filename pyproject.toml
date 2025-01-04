@@ -36,7 +36,6 @@ pyxdg = "^0.28"
 betterconf = "^4.2.0"
 pytz = "^2024.2"
 pycryptodome = "^3.21.0"
-argon2-cffi = "^23.1.0"
 
 [tool.poetry.group.dev.dependencies]
 ipython = "^8.31.0"
