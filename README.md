@@ -47,9 +47,9 @@ dns:
 | Command  | Subcommand  | Function   | Positional        | Params                                 |
 | -------- | ----------- | ---------- | ----------------- | -------------------------------------- |
 | `audio`  | `info`      |            |                   |                                        |
-| `crypt`  | `generate`  | `key`      |                   |                                        |
 | `crypt`  | `random`    | `char`     | `LENGTH`          |                                        |
 | `crypt`  | `random`    | `hex`      | `LENGTH`          |                                        |
+| `crypt`  | `random`    | `key`      |                   |                                        |
 | `crypt`  | `random`    | `pw`       | `LENGTH`          | `-n`, `--numbers` Add numbers          |
 |          |             |            |                   | `-s`, `--symbols` Add symbols          |
 |          |             |            |                   | `-c`, `--chbs` Use xkcd format         |

@@ -14,16 +14,16 @@ class WireguardKeypair:
         return f"Keypair(private={self.private}, public={self.public})"
 
 
-def crypt_generate_key() -> str:
-    return "crypt_generate_key: Not yet implemented"
-
-
 def crypt_random_char() -> str:
     return "crypt_random_char: Not yet implemented"
 
 
 def crypt_random_hex() -> str:
     return "crypt_random_hex: Not yet implemented"
+
+
+def crypt_random_key() -> str:
+    return "crypt_random_key: Not yet implemented"
 
 
 def crypt_random_pw() -> str:
