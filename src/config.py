@@ -2,7 +2,7 @@ from os import getenv
 from pathlib import Path
 from textwrap import dedent
 
-from cryptography.fernet import Fernet
+from pyrage import x25519
 from xdg import BaseDirectory
 from yaml import safe_load
 
@@ -30,7 +30,7 @@ def get_config() -> dict:
                     #
                     crypt:
                         env: BELT_CRYPT_KEY
-                        key: {Fernet.generate_key().decode()}
+                        key: {str(x25519.Identity().generate())}
                         warned: false
                     dns:
                         server: 1.1.1.1
@@ -85,15 +85,13 @@ def get_config() -> dict:
     return config
 
 
-def get_crypt() -> Fernet:
+def get_key() -> x25519.Identity:
     config = get_config()
-    if config.get("crypt"):
-        if config.get("crypt").get("env"):
-            env = getenv(config["crypt"]["env"])
-            if env:
-                return Fernet(env)
-            else:
-                key = config.get("crypt").get("key")
-                if key:
-                    return Fernet(key)
+    env = config.get("crypt").get("env")
+    if env:
+        key = getenv(env)
+    else:
+        key = config.get("crypt").get("key")
+    if key:
+        return x25519.Identity.from_str(key)
     return None

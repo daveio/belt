@@ -1,10 +1,6 @@
-from datetime import datetime
-
 import click
-from pytz import timezone
 
 from audio_commands import audio_info
-from config import get_crypt
 from crypt_commands import (
     crypt_random_hex,
     crypt_random_key,
@@ -24,17 +20,9 @@ def cli() -> None:
     pass
 
 
-@cli.command()
-def test() -> None:
-    crypt = get_crypt()
-    plaintext = "Hello, World!"
-    encrypted = crypt.encrypt(plaintext.encode())
-    click.echo(f"Plaintext: {plaintext}")
-    click.echo(f"Encrypted: {encrypted.decode()}")
-    click.echo(
-        f"Timestamp: {datetime.fromtimestamp(crypt.extract_timestamp(encrypted), timezone('UTC'))}"
-    )
-    click.echo(f"Decrypted: {crypt.decrypt(encrypted).decode()}")
+# @cli.command()
+# def test() -> None:
+#     pass
 
 
 @cli.group()
@@ -94,13 +82,13 @@ def simple() -> None:
 
 
 @simple.command()
-def dec() -> None:
-    click.echo(crypt_simple_decrypt())
+def decrypt() -> None:
+    crypt_simple_decrypt()
 
 
 @simple.command()
-def enc() -> None:
-    click.echo(crypt_simple_encrypt())
+def encrypt() -> None:
+    crypt_simple_encrypt()
 
 
 @crypt.command()

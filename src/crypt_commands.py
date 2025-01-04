@@ -1,8 +1,13 @@
+from base64 import b64decode, b64encode
 from codecs import encode
+from sys import stdin, stdout
 from textwrap import dedent
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
+from pyrage import decrypt, encrypt, x25519
+
+from config import get_key
 
 
 class WireguardKeypair:
@@ -19,7 +24,8 @@ def crypt_random_hex() -> str:
 
 
 def crypt_random_key() -> str:
-    return "crypt_random_key: Not yet implemented"
+    identity = x25519.Identity.generate()
+    return str(identity)
 
 
 def crypt_random_pw() -> str:
@@ -27,11 +33,18 @@ def crypt_random_pw() -> str:
 
 
 def crypt_simple_encrypt() -> str:
-    return "crypt_simple_encrypt: Not yet implemented"
+    key = get_key()
+    plaintext = stdin.buffer.read()
+    ciphertext = encrypt(plaintext, [key.to_public()])
+    stdout.write(b64encode(ciphertext).decode("utf-8"))
 
 
-def crypt_simple_decrypt() -> str:
-    return "crypt_simple_decrypt: Not yet implemented"
+def crypt_simple_decrypt() -> None:
+    key = get_key()
+    cipherb64 = stdin.buffer.read().decode("utf-8")
+    ciphertext = b64decode(cipherb64)
+    plaintext = decrypt(ciphertext, [key])
+    stdout.buffer.write(plaintext)
 
 
 def crypt_wireguard(script: bool) -> str:
