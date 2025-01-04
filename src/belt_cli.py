@@ -6,7 +6,6 @@ from pytz import timezone
 from audio_commands import audio_info
 from config import get_crypt
 from crypt_commands import (
-    crypt_random_char,
     crypt_random_hex,
     crypt_random_key,
     crypt_random_pw,
@@ -72,11 +71,6 @@ def info(path: click.Path) -> None:
 @crypt.group()
 def random() -> None:  # DevSkim: ignore DS148264
     pass
-
-
-@random.command()
-def char() -> None:
-    click.echo(crypt_random_char())
 
 
 @random.command()

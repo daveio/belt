@@ -44,27 +44,27 @@ dns:
 
 ### Functionality selection
 
-| Command  | Subcommand  | Function   | Positional        | Params                                 |
-| -------- | ----------- | ---------- | ----------------- | -------------------------------------- |
-| `audio`  | `info`      |            |                   |                                        |
-| `crypt`  | `random`    | `char`     | `LENGTH`          |                                        |
-| `crypt`  | `random`    | `hex`      | `LENGTH`          |                                        |
-| `crypt`  | `random`    | `key`      |                   |                                        |
-| `crypt`  | `random`    | `pw`       | `LENGTH`          | `-n`, `--numbers` Add numbers          |
-|          |             |            |                   | `-s`, `--symbols` Add symbols          |
-|          |             |            |                   | `-c`, `--chbs` Use xkcd format         |
-| `crypt`  | `simple`    | `decrypt`  |                   | `-e`, `--env` `VAR` Use key from env   |
-| `crypt`  | `simple`    | `encrypt`  |                   | `-e`, `--env` `VAR` Use key from env   |
-| `crypt`  | `wireguard` |            |                   |                                        |
-| `dns`    | `flush`     |            |                   |                                        |
-| `dns`    | `lookup`    |            | `QUERY`           | `-s`, `--server` `HOSTNAME` Use server |
-|          |             |            | `[RECORDTYPE]`    | `-r`, `--root` Use root servers        |
-| `dns`    | `sec`       |            | `DOMAIN.TLD`      |                                        |
-| `tls`    | `cert`      | `req`      | `COMMONNAME`      | `-c`, `--client` Request client cert   |
-| `tls`    | `cert`      | `selfsign` | `COMMONNAME`      | `-c`, `--client` Generate client cert  |
-| `tls`    | `ciphers`   |            | `HOSTNAME` `PORT` |                                        |
-| `domain` | `expiry`    |            | `DOMAIN.TLD`      |                                        |
-| `domain` | `ns`        |            | `DOMAIN.TLD`      |                                        |
+| Command  | Subcommand  | Function   | Positional     | Params                                 |
+| -------- | ----------- | ---------- | -------------- | -------------------------------------- |
+| `audio`  | `info`      |            |                |                                        |
+| `crypt`  | `random`    | `hex`      | `LENGTH`       |                                        |
+| `crypt`  | `random`    | `key`      |                |                                        |
+| `crypt`  | `random`    | `pw`       | `LENGTH`       | `-n`, `--numbers` Add numbers          |
+|          |             |            |                | `-s`, `--symbols` Add symbols          |
+|          |             |            |                | `-c`, `--chbs` Use xkcd format         |
+| `crypt`  | `simple`    | `decrypt`  | `<STDIN>`      | `-e`, `--env` `VAR` Use key from env   |
+| `crypt`  | `simple`    | `encrypt`  | `<STDIN>`      | `-e`, `--env` `VAR` Use key from env   |
+| `crypt`  | `wireguard` |            |                |                                        |
+| `dns`    | `flush`     |            |                |                                        |
+| `dns`    | `lookup`    |            | `QUERY`        | `-s`, `--server` `HOSTNAME` Use server |
+|          |             |            | `[RECORDTYPE]` | `-r`, `--root` Use root servers        |
+| `dns`    | `sec`       |            | `DOMAIN.TLD`   |                                        |
+| `tls`    | `cert`      | `req`      | `COMMONNAME`   | `-c`, `--client` Request client cert   |
+| `tls`    | `cert`      | `selfsign` | `COMMONNAME`   | `-c`, `--client` Generate client cert  |
+| `tls`    | `ciphers`   |            | `HOSTNAME`     |                                        |
+|          |             |            | `PORT`         |                                        |
+| `domain` | `expiry`    |            | `DOMAIN.TLD`   |                                        |
+| `domain` | `ns`        |            | `DOMAIN.TLD`   |                                        |
 
 ## Features
 
