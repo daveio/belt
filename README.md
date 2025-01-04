@@ -47,7 +47,7 @@ dns:
 | Command  | Subcommand  | Function   | Positional        | Params                                 |
 | -------- | ----------- | ---------- | ----------------- | -------------------------------------- |
 | `audio`  | `info`      |            |                   |                                        |
-| `crypt`  | `generate`  | `key`      | `<STDIN>`         |                                        |
+| `crypt`  | `generate`  | `key`      |                   |                                        |
 | `crypt`  | `random`    | `char`     | `LENGTH`          |                                        |
 | `crypt`  | `random`    | `hex`      | `LENGTH`          |                                        |
 | `crypt`  | `random`    | `pw`       | `LENGTH`          | `-n`, `--numbers` Add numbers          |
