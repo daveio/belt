@@ -49,7 +49,7 @@ If you want to be explicit about it you can run `belt init`, which will **overwr
 ```yaml
 crypt:
   env: BELT_CRYPT_KEY
-  key: ELYkrte99XWbLWJckwxLHz2XZzF1mn57JsDBKX43QlQ=
+  key: AGE-SECRET-KEY-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   warned: false
 dns:
   server: 1.1.1.1
