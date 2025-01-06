@@ -1,22 +1,50 @@
 # `belt`: a cli toolbox
 
-## Language
+## Installation
 
-Python 3.12
+### `pipx` (recommended)
 
-## Config file
+I would suggest installation using `pipx`. This keeps `belt` from affecting anything else in your default `pip` environment.
 
-Format: `YAML`
+First install `pipx`-
 
-Path: `~/.config/belt/config.json`
+```shell
+pip install pipx
+```
 
-| Group   | Key      | Type   | Description                                                                 |
-| ------- | -------- | ------ | --------------------------------------------------------------------------- |
-| `crypt` | `env`    | `str`  | Environment variable to use for encryption key                              |
-| `crypt` | `key`    | `str`  | Default key for encryption/decryption (if `crypt -> env` is empty or unset) |
-| `crypt` | `warned` | `bool` | Whether the user has been warned about the consequences of losing the key   |
-| `dns`   | `server` | `str`  | Default DNS server to use for lookups                                       |
-| `dns`   | `root`   | `bool` | Use root servers directly for lookups                                       |
+Then use `pipx` to install `belt-cli`-
+
+```shell
+pipx install belt-cli
+```
+
+By default, this will put the executable in `~/.local/bin`- make sure it's in your shell`$PATH`or`fish_user_paths`.
+
+### `pip`
+
+If you don't want to use `pipx` then you can simply do
+
+```shell
+pip install belt-cli
+```
+
+## Configuration
+
+### Path
+
+```text
+~/.config/belt/config.yaml
+```
+
+### Generating Configuration
+
+If no config exists, a sample config (with random key) is generated when you first run `belt`.
+
+If you want to be explicit about it you can run `belt init`, which will **overwrite any existing config and keys** so think about it first.
+
+`belt` will warn you and request confirmation if an existing config exists.
+
+### Sample Configuration
 
 ```yaml
 crypt:
@@ -28,95 +56,10 @@ dns:
   root: false
 ```
 
-## Args and flags
+## Key Management
 
-### Universal flags
+Make sure you **back up your key**, whether you store it in the config file or the environment. A password manager is an excellent choice for this.
 
-| Full flag               | Abbreviation  |
-| ----------------------- | ------------- |
-| `--config` `FILE`       | `-c` `FILE`   |
-| `--env-prefix` `PREFIX` | `-e` `PREFIX` |
-| `--help`                | `-h`          |
-| `--in` `FILE`           | `-i` `FILE`   |
-| `--out` `FILE`          | `-o` `FILE`   |
-| `--verbose`             | `-v`          |
-| `--version`             | `-V`          |
+If you use `chezmoi`to manage your dotfiles, add the `belt` config file with encryption. Though you then need to make sure you back up your `chezmoi` key.
 
-### Functionality selection
-
-| Command  | Subcommand  | Function   | Positional     | Params                                 |
-| -------- | ----------- | ---------- | -------------- | -------------------------------------- |
-| `audio`  | `info`      |            |                |                                        |
-| `crypt`  | `random`    | `hex`      | `LENGTH`       |                                        |
-| `crypt`  | `random`    | `key`      |                |                                        |
-| `crypt`  | `random`    | `pw`       | `LENGTH`       | `-n`, `--numbers` Add numbers          |
-|          |             |            |                | `-s`, `--symbols` Add symbols          |
-|          |             |            |                | `-c`, `--chbs` Use xkcd format         |
-| `crypt`  | `simple`    | `decrypt`  | `<STDIN>`      | `-e`, `--env` `VAR` Use key from env   |
-| `crypt`  | `simple`    | `encrypt`  | `<STDIN>`      | `-e`, `--env` `VAR` Use key from env   |
-| `crypt`  | `wireguard` |            |                |                                        |
-| `dns`    | `flush`     |            |                |                                        |
-| `dns`    | `lookup`    |            | `QUERY`        | `-s`, `--server` `HOSTNAME` Use server |
-|          |             |            | `[RECORDTYPE]` | `-r`, `--root` Use root servers        |
-| `dns`    | `sec`       |            | `DOMAIN.TLD`   |                                        |
-| `init`   |             |            |                |                                        |
-| `tls`    | `cert`      | `req`      | `COMMONNAME`   | `-c`, `--client` Request client cert   |
-| `tls`    | `cert`      | `selfsign` | `COMMONNAME`   | `-c`, `--client` Generate client cert  |
-| `tls`    | `ciphers`   |            | `HOSTNAME`     |                                        |
-|          |             |            | `PORT`         |                                        |
-| `domain` | `expiry`    |            | `DOMAIN.TLD`   |                                        |
-| `domain` | `ns`        |            | `DOMAIN.TLD`   |                                        |
-
-## Features
-
-### 1.0
-
-- DNS
-  - Lookup
-  - DNSSEC check
-    - Remediation instructions
-  - OS cache flush
-- TLS
-  - Cipher list and order
-  - Certificate generation
-    - All features for client or server certificate
-    - Self signed
-    - Certificate request
-- Cryptography
-  - Simple encrypt/decrypt
-    - Password from readline or env var
-  - Generate WireGuard keypair
-  - Random generation
-    - Alphanumeric + symbols
-    - Alphanumeric
-    - Alphabetical
-    - Numeric
-    - Hex
-    - 0x prefixed hex
-- Domain
-  - Time to expiry from WHOIS
-  - Nameserver lookup from WHOIS
-- Audio files
-  - Get sample rate and bit depth
-
-### Planned
-
-- Git
-  - Clone
-  - Pull
-  - Push
-  - Branch
-  - Detect remote changes
-- SSH
-  - Tunnels
-  - Connections
-  - Config management
-  - Cipherspec validation
-    - Remediation
-- DNS
-  - Propagation checks
-    - Multiple public resolvers
-- Cloudflare
-  - Clear cache
-- Workspace
-  - Replicate `ws` functionality
+Without the key, anything you encrypt with `belt crypt simple encrypt`will be unrecoverable.
