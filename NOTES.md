@@ -38,12 +38,12 @@ Path: `~/.config/belt/config.json`
 | -------- | ----------- | ---------- | -------------- | -------------------------------------- |
 | `audio`  | `info`      |            |                |                                        |
 | `crypt`  | `random`    | `hex`      | `LENGTH`       |                                        |
-| `crypt`  | `random`    | `key`      |                |                                        |
 | `crypt`  | `random`    | `pw`       | `LENGTH`       | `-n`, `--numbers` Add numbers          |
 |          |             |            |                | `-s`, `--symbols` Add symbols          |
 |          |             |            |                | `-c`, `--chbs` Use xkcd format         |
 | `crypt`  | `simple`    | `decrypt`  | `<STDIN>`      | `-e`, `--env` `VAR` Use key from env   |
 | `crypt`  | `simple`    | `encrypt`  | `<STDIN>`      | `-e`, `--env` `VAR` Use key from env   |
+| `crypt`  | `simple`    | `key`      |                | `-r`, `--random` Generate random key   |
 | `crypt`  | `wireguard` |            |                |                                        |
 | `dns`    | `flush`     |            |                |                                        |
 | `dns`    | `lookup`    |            | `QUERY`        | `-s`, `--server` `HOSTNAME` Use server |
@@ -56,6 +56,36 @@ Path: `~/.config/belt/config.json`
 |          |             |            | `PORT`         |                                        |
 | `domain` | `expiry`    |            | `DOMAIN.TLD`   |                                        |
 | `domain` | `ns`        |            | `DOMAIN.TLD`   |                                        |
+
+## Cryptography
+
+### Key generation
+
+#### Length
+
+32 bytes
+
+#### Key Encoding
+
+`cryptography.hazmat.primitives.serialization.Encoding.PEM`
+
+#### Passphrase
+
+`cryptography.hazmat.primitives.kdf.argon2.Argon2id`
+
+#### Random
+
+`cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305.generate_key()`
+
+### Encryption & Decryption
+
+#### Encoding
+
+`cryptography.hazmat.primitives.serialization.Encoding.PEM`
+
+#### Encryption
+
+`cryptography.hazmat.primitives.ciphers.aead.ChaCha20Poly1305`
 
 ## Features
 
