@@ -18,16 +18,6 @@ Path: `~/.config/belt/config.json`
 | `dns`   | `server` | `str`  | Default DNS server to use for lookups                                       |
 | `dns`   | `root`   | `bool` | Use root servers directly for lookups                                       |
 
-```yaml
-crypt:
-  env: BELT_CRYPT_KEY
-  key: ELYkrte99XWbLWJckwxLHz2XZzF1mn57JsDBKX43QlQ=
-  warned: false
-dns:
-  server: 1.1.1.1
-  root: false
-```
-
 ## Args and flags
 
 ### Universal flags
@@ -72,77 +62,51 @@ dns:
 ### 1.0
 
 - DNS
-
   - Lookup
   - DNSSEC check
-
     - Remediation instructions
-
   - OS cache flush
-
 - TLS
-
   - Cipher list and order
   - Certificate generation
-
     - All features for client or server certificate
     - Self signed
     - Certificate request
-
 - Cryptography
-
   - Simple encrypt/decrypt
-
     - Password from readline or env var
-
   - Generate WireGuard keypair
   - Random generation
-
     - Alphanumeric + symbols
     - Alphanumeric
     - Alphabetical
     - Numeric
     - Hex
     - 0x prefixed hex
-
 - Domain
-
   - Time to expiry from WHOIS
   - Nameserver lookup from WHOIS
-
 - Audio files
-
   - Get sample rate and bit depth
 
 ### Planned
 
 - Git
-
   - Clone
   - Pull
   - Push
   - Branch
   - Detect remote changes
-
 - SSH
-
   - Tunnels
   - Connections
   - Config management
   - Cipherspec validation
-
     - Remediation
-
 - DNS
-
   - Propagation checks
-
     - Multiple public resolvers
-
 - Cloudflare
-
   - Clear cache
-
 - Workspace
-
   - Replicate `ws` functionality
