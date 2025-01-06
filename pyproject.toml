@@ -12,7 +12,6 @@ classifiers = [
   "Programming Language :: Python",
 ]
 dependencies = [
-  "age >= 0.5.1",
   "betterconf >= 4.2.0",
   "chevron >= 0.14.0",
   "click >= 8.1.8",
