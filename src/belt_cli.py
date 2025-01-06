@@ -62,8 +62,9 @@ def random() -> None:  # DevSkim: ignore DS148264
 
 
 @random.command()
-def hex() -> None:
-    click.echo(crypt_random_hex())
+@click.argument("length", nargs=1, type=int, required=False, default=16)
+def hex(length: int) -> None:
+    click.echo(crypt_random_hex(length))
 
 
 @random.command()

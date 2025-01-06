@@ -1,5 +1,6 @@
 from base64 import b64decode, b64encode
 from codecs import encode
+from secrets import token_hex
 from sys import stdin, stdout
 from textwrap import dedent
 
@@ -19,8 +20,8 @@ class WireguardKeypair:
         return f"Keypair(private={self.private}, public={self.public})"
 
 
-def crypt_random_hex() -> str:
-    return "crypt_random_hex: Not yet implemented"
+def crypt_random_hex(length: int) -> str:
+    return token_hex(length)
 
 
 def crypt_random_key() -> str:

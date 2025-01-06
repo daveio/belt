@@ -1,50 +1,45 @@
-[tool.poetry]
-name = "belt-cli"
-version = "0.1.8"
-description = "CLI toolbelt"
-authors = ["Dave Williams <dave@dave.io>"]
-license = "MIT"
-repository = "https://github.com/daveio/belt"
-readme = "README.md"
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=2.0.0"]
+
+[project]
+authors = [{ email = "dave@dave.io", name = "Dave Williams" }]
 classifiers = [
   "Development Status :: 4 - Beta",
-  "Programming Language :: Python",
-  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: Implementation :: CPython",
   "Programming Language :: Python :: Implementation :: PyPy",
+  "Programming Language :: Python",
 ]
+dependencies = [
+  "betterconf >= 4.2.0",
+  "chevron >= 0.14.0",
+  "click >= 8.1.8",
+  "colorama >= 0.4.6",
+  "cryptography >= 44.0.0",
+  "dnspython >= 2.7.0",
+  "mutagen >= 1.47.0",
+  "poetry >= 2.0.0",
+  "poetry-plugin-shell >= 1.0.1",
+  "putio-py >= 8.7.0",
+  "pyrage >= 1.2.3",
+  "pytz >= 2024.2",
+  "pyxdg >= 0.28",
+  "pyyaml >= 6.0.2",
+  "requests >= 2.32.3",
+  "showcert >= 0.2.12",
+  "types-chevron >= 0.14.2.20250103",
+  "wireguard-tools >= 0.5.0",
+]
+description = "CLI toolbelt"
 keywords = []
-packages = [{ include = "*.py", from = "src" }]
+license = "MIT"
+name = "belt-cli"
+packages = [{ from = "src", include = "*.py" }]
+readme = "README.md"
+repository = "https://github.com/daveio/belt"
+requires-python = ">=3.11, <4.0"
+version = "0.1.8"
 
-
-[tool.poetry.dependencies]
-python = "^3.12"
-poetry = "2.0.0"
-requests = "^2.32.3"
-cryptography = "^44.0.0"
-click = "^8.1.8"
-wireguard-tools = "^0.5.0"
-chevron = "^0.14.0"
-types-chevron = "^0.14.2.20250103"
-mutagen = "^1.47.0"
-dnspython = "^2.7.0"
-showcert = "^0.2.12"
-colorama = "^0.4.6"
-putio-py = "^8.7.0"
-pyyaml = "^6.0.2"
-pyxdg = "^0.28"
-betterconf = "^4.2.0"
-pytz = "^2024.2"
-pyrage = "^1.2.3"
-poetry-plugin-shell = "^1.0.1"
-
-[tool.poetry.group.dev.dependencies]
-ipython = "^8.31.0"
-bpython = "^0.24"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
-
-[tool.poetry.scripts]
+[project.scripts]
 belt = 'belt_cli:cli'
