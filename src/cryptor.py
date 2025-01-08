@@ -1,0 +1,56 @@
+from os import urandom
+
+from base58 import b58decode_check, b58encode_check
+from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
+from cryptography.hazmat.primitives.hashes import BLAKE2b, Hash
+
+
+class Cryptor:
+    def __init__(self, key: str) -> None:
+        self.key = b58decode_check(key, autofix=True)
+
+    def encrypt(self, plaintext: str | bytes, wrap: bool) -> bytes | str:
+        if type(plaintext) is str:
+            plaintext = Cryptor.unwrap(plaintext)
+        algo = ChaCha20Poly1305(self.key)
+        nonce = urandom(12)
+        hasher = Hash(BLAKE2b(digest_size=64))
+        hasher.update(plaintext)
+        hash = hasher.finalize()
+        encrypted = algo.encrypt(nonce, plaintext, hash)
+        out = nonce + hash + encrypted
+        if wrap:
+            return Cryptor.wrap(out)
+        else:
+            return out
+
+    def decrypt(self, ciphertext: str | bytes, stringify: bool) -> bytes | str:
+        if type(ciphertext) is str:
+            ciphertext = Cryptor.unwrap(ciphertext)
+        algo = ChaCha20Poly1305(self.key)
+        nonce = ciphertext[:12]
+        hash = ciphertext[12:76]
+        document = ciphertext[76:]
+        decrypted = algo.decrypt(nonce, document, hash)
+        hasher = Hash(BLAKE2b(digest_size=64))
+        hasher.update(decrypted)
+        calculated_hash = hasher.finalize()
+        if calculated_hash == hash:
+            if stringify:
+                return decrypted.decode("utf-8")
+            else:
+                return decrypted
+        else:
+            return ValueError("Invalid ciphertext")
+
+    def keygen(raw: bool) -> bytes | str:
+        key = ChaCha20Poly1305.generate_key()
+        if raw:
+            return key
+        return Cryptor.wrap(key)
+
+    def wrap(material: bytes) -> str:
+        return b58encode_check(material).decode("utf-8")
+
+    def unwrap(material: str) -> bytes:
+        return b58decode_check(material)

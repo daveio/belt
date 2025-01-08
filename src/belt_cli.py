@@ -3,10 +3,10 @@ import click
 from audio_commands import audio_info
 from crypt_commands import (
     crypt_random_hex,
-    crypt_random_key,
     crypt_random_pw,
     crypt_simple_decrypt,
     crypt_simple_encrypt,
+    crypt_simple_key,
     crypt_wireguard,
 )
 from dns_commands import dns_flush, dns_lookup, dns_sec
@@ -68,11 +68,6 @@ def hex(length: int) -> None:
 
 
 @random.command()
-def key() -> None:
-    click.echo(crypt_random_key())
-
-
-@random.command()
 def pw() -> None:
     click.echo(crypt_random_pw())
 
@@ -90,6 +85,11 @@ def decrypt() -> None:
 @simple.command()
 def encrypt() -> None:
     click.echo(crypt_simple_encrypt())
+
+
+@simple.command()
+def key() -> None:
+    click.echo(crypt_simple_key())
 
 
 @crypt.command()

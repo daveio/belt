@@ -63,11 +63,11 @@ Path: `~/.config/belt/config.json`
 
 #### Length
 
-32 bytes
+32 bytes (256-bit)
 
 #### Key Encoding
 
-`cryptography.hazmat.primitives.serialization.Encoding.PEM`
+`base58`
 
 #### Passphrase
 

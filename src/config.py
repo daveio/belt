@@ -2,17 +2,17 @@ from os import getenv
 from pathlib import Path
 from textwrap import dedent
 
-from pyrage import x25519
 from xdg import BaseDirectory
 from yaml import safe_load
+
+from cryptor import Cryptor
 
 
 def get_config() -> dict:
     config_path = Path(BaseDirectory.save_config_path("belt") + "/config.yaml")
 
     if config_path.is_file():
-        with open(config_path, "r") as file:
-            yaml = safe_load(file)
+        pass
     else:
         with open(config_path, "w") as file:
             file.write(
@@ -31,7 +31,7 @@ def get_config() -> dict:
                     #
                     crypt:
                         env: BELT_CRYPT_KEY
-                        key: {str(x25519.Identity.generate())}
+                        key: {Cryptor.keygen(raw=False)}
                         warned: false
                     dns:
                         server: 1.1.1.1
@@ -39,8 +39,8 @@ def get_config() -> dict:
                     """
                 )
             )
-        with open(config_path, "r") as file:
-            yaml = safe_load(file)
+    with open(config_path, "r") as file:
+        yaml = safe_load(file)
 
     config = {}
 
@@ -77,7 +77,7 @@ def get_config() -> dict:
     return config
 
 
-def get_key() -> x25519.Identity:
+def get_key() -> str:
     config = get_config()
     env = config.get("crypt").get("env")
     if env:
@@ -85,5 +85,5 @@ def get_key() -> x25519.Identity:
     if key is None:
         key = config.get("crypt").get("key")
     if key:
-        return x25519.Identity.from_str(key)
+        return key
     return None

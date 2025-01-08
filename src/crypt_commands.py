@@ -1,4 +1,3 @@
-from base64 import b64decode, b64encode
 from codecs import encode
 from secrets import token_hex
 from sys import stdin, stdout
@@ -6,9 +5,9 @@ from textwrap import dedent
 
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
-from pyrage import decrypt, encrypt, x25519
 
 from config import get_key
+from cryptor import Cryptor
 
 
 class WireguardKeypair:
@@ -24,29 +23,26 @@ def crypt_random_hex(length: int) -> str:
     return token_hex(length)
 
 
-def crypt_random_key() -> str:
-    identity = x25519.Identity.generate()
-    return str(identity)
-
-
 def crypt_random_pw() -> str:
     return "crypt_random_pw: Not yet implemented"
+
+
+def crypt_simple_decrypt() -> None:
+    key = get_key()
+    ciphertext = stdin.buffer.read().decode("utf-8")
+    plaintext = Cryptor(key).decrypt(ciphertext, stringify=False)
+    stdout.buffer.write(plaintext)
+    stdout.flush()
 
 
 def crypt_simple_encrypt() -> str:
     key = get_key()
     plaintext = stdin.buffer.read()
-    ciphertext = encrypt(plaintext, [key.to_public()])
-    return b64encode(ciphertext).decode("utf-8")
+    return Cryptor(key).encrypt(plaintext, wrap=True)
 
 
-def crypt_simple_decrypt() -> None:
-    key = get_key()
-    cipherb64 = stdin.buffer.read().decode("utf-8")
-    ciphertext = b64decode(cipherb64)
-    plaintext = decrypt(ciphertext, [key])
-    stdout.buffer.write(plaintext)
-    stdout.flush()
+def crypt_simple_key() -> str:
+    return Cryptor.keygen(raw=False)
 
 
 def crypt_wireguard(script: bool) -> str:
