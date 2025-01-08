@@ -42,8 +42,6 @@ To generate an initial configuration file containing defaults and a random key, 
 
 You can also give permission to overwrite existing configuration with the `-o` or `--overwrite` flag.
 
-````shell
-
 ### Sample Configuration
 
 ```yaml
@@ -54,7 +52,7 @@ crypt:
 dns:
   server: 1.1.1.1
   root: false
-````
+```
 
 ## Key Management
 
