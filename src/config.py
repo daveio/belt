@@ -2,6 +2,7 @@ from os import getenv
 from pathlib import Path
 from textwrap import dedent
 
+from click import Abort, echo
 from xdg import BaseDirectory
 from yaml import safe_load
 
@@ -9,36 +10,11 @@ from cryptor import Cryptor
 
 
 def get_config() -> dict:
-    config_path = Path(BaseDirectory.save_config_path("belt") + "/config.yaml")
+    config_path = get_config_path()
 
-    if config_path.is_file():
-        pass
-    else:
-        with open(config_path, "w") as file:
-            file.write(
-                dedent(
-                    f"""
-                    # Example configuration file for Belt
-                    #
-                    # crypt:
-                    #   env:    # Environment variable containing the key to use for encryption/decryption
-                    #           # This supercedes any key specified in the 'key' field
-                    #   key:    # Key to use for encryption/decryption
-                    #   warned: # Whether the user has been warned about the consequences of losing the key
-                    # dns:
-                    #   server: # DNS server to use for DNS lookups
-                    #   root:   # Whether to use root servers directly for DNS lookups
-                    #
-                    crypt:
-                        env: BELT_CRYPT_KEY
-                        key: {Cryptor.keygen(raw=False)}
-                        warned: false
-                    dns:
-                        server: 1.1.1.1
-                        root: false
-                    """
-                )
-            )
+    if not config_path.is_file():
+        echo("No config file found. Run 'belt init' to create a new one.")
+        raise Abort()
     with open(config_path, "r") as file:
         yaml = safe_load(file)
 
@@ -87,3 +63,48 @@ def get_key() -> str:
     if key:
         return key
     return None
+
+
+def get_warned() -> bool:
+    config = get_config()
+    warned = config.get("crypt").get("warned")
+    if warned is None:
+        warned = False
+    return warned
+
+
+def get_default_config_yaml() -> str:
+    print("get_default_config_yaml")
+    return dedent(
+        f"""
+            # Example configuration file for Belt
+            #
+            # crypt:
+            #   env:    # Environment variable containing the key to use for encryption/decryption
+            #           # This supercedes any key specified in the 'key' field
+            #   key:    # Key to use for encryption/decryption
+            #   warned: # Whether the user has been warned about the consequences of losing the key
+            # dns:
+            #   server: # DNS server to use for DNS lookups
+            #   root:   # Whether to use root servers directly for DNS lookups
+            #
+            crypt:
+                env: BELT_CRYPT_KEY
+                key: {Cryptor.keygen(raw=False)}
+                warned: false
+            dns:
+                server: 1.1.1.1
+                root: false
+        """
+    )
+
+
+def write_default_config() -> None:
+    path = get_config_path()
+    with open(path, "w") as file:
+        file.write(get_default_config_yaml())
+
+
+def get_config_path() -> Path:
+    config_dir = BaseDirectory.save_config_path("belt")
+    return Path(config_dir + "/config.yaml")

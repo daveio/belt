@@ -38,18 +38,16 @@ pip install belt-cli
 
 ### Generating Configuration
 
-If no config exists, a sample config (with random key) is generated when you first run `belt`.
+If no config exists, a sample config (with random key) containing defaults is generated when you first run `belt`.
 
-If you want to be explicit about it you can run `belt init`, which will **overwrite any existing config and keys** so think about it first.
-
-`belt` will warn you and request confirmation if an existing config exists.
+If you want to be explicit about it you can run `belt init`, which will **overwrite any existing config and keys**. `belt` will warn you and request confirmation if an existing config exists.
 
 ### Sample Configuration
 
 ```yaml
 crypt:
   env: BELT_CRYPT_KEY
-  key: AGE-SECRET-KEY-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   warned: false
 dns:
   server: 1.1.1.1
@@ -60,6 +58,17 @@ dns:
 
 Make sure you **back up your key**, whether you store it in the config file or the environment. A password manager is an excellent choice for this.
 
-If you use `chezmoi`to manage your dotfiles, add the `belt` config file with encryption. Though you then need to make sure you back up your `chezmoi` key.
+If you use `chezmoi` to manage your dotfiles, add the `belt` config file with encryption. Though you then need to make sure you back up your `chezmoi` key.
 
-Without the key, anything you encrypt with `belt crypt simple encrypt`will be unrecoverable.
+Without the key, anything you encrypt with `belt crypt simple encrypt` will be unrecoverable.
+
+## Encryption and decryption
+
+Encryption is performed using `ChaCha20Poly1305` AEAD combined with a 64-bit `BLAKE2b` hash. Keys and encrypted data are `Base85` encoded with the Bitcoin alphabet for compatibility, which uses only alphanumeric characters. Key and data integrity are checked at multiple stages.
+
+**The cryptographic implementation in `belt` does not split input into blocks**. This makes it entirely unsuitable for encrypting files or anything larger than around 100kB. It's intended for encrypting and decrypting short strings like API keys, but works fine for most configuration files too.
+
+If you want strong symmetric encryption suitable for files, [`age`][age] (or the faster Rust implementation, [`rage`][rage]) is a good choice.
+
+[age]: https://github.com/FiloSottile/age
+[rage]: https://github.com/str4d/rage

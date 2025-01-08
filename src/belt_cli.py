@@ -1,6 +1,7 @@
 import click
 
 from audio_commands import audio_info
+from config import get_config_path, get_warned, write_default_config
 from crypt_commands import (
     crypt_random_hex,
     crypt_random_pw,
@@ -9,6 +10,7 @@ from crypt_commands import (
     crypt_simple_key,
     crypt_wireguard,
 )
+from cryptor import Cryptor
 from dns_commands import dns_flush, dns_lookup, dns_sec
 from domain_commands import domain_expiry, domain_ns
 from tls_commands import tls_cert_req, tls_cert_selfsign, tls_ciphers
@@ -18,6 +20,29 @@ from tls_commands import tls_cert_req, tls_cert_selfsign, tls_ciphers
 @click.version_option()
 def cli() -> None:
     pass
+
+
+@cli.command()
+@click.option(
+    "-o",
+    "--overwrite",
+    is_flag=True,
+    show_default=True,
+    default=False,
+    help="Overwrite existing files without asking for confirmation",
+)
+def init(overwrite: bool) -> None:
+    config_path = get_config_path()
+    if config_path.is_file():
+        if overwrite:
+            write_default_config()
+        else:
+            if click.confirm(
+                f"Config file already exists at {config_path}. Overwrite?", abort=True
+            ):
+                write_default_config()
+    else:
+        write_default_config()
 
 
 # @cli.command()
@@ -51,7 +76,6 @@ def tls() -> None:
 
 
 @audio.command()
-@click.argument("path", nargs=1, type=click.Path(), default=".")
 def info(path: click.Path) -> None:
     click.echo(audio_info(path))
 
@@ -79,16 +103,19 @@ def simple() -> None:
 
 @simple.command()
 def decrypt() -> None:
+    Cryptor.warn(get_warned())
     crypt_simple_decrypt()
 
 
 @simple.command()
 def encrypt() -> None:
+    Cryptor.warn(get_warned())
     click.echo(crypt_simple_encrypt())
 
 
 @simple.command()
 def key() -> None:
+    Cryptor.warn(get_warned())
     click.echo(crypt_simple_key())
 
 

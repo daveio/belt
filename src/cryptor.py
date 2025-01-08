@@ -1,6 +1,8 @@
 from os import urandom
+from textwrap import dedent
 
 from base58 import b58decode_check, b58encode_check
+from click import echo
 from cryptography.hazmat.primitives.ciphers.aead import ChaCha20Poly1305
 from cryptography.hazmat.primitives.hashes import BLAKE2b, Hash
 
@@ -54,3 +56,19 @@ class Cryptor:
 
     def unwrap(material: str) -> bytes:
         return b58decode_check(material)
+
+    def warn(warned: bool) -> str:
+        if not warned:
+            echo(
+                dedent(
+                    """
+                    WARNING: Make sure to back up your encryption key!
+                    If you lose it, you will be unable to decrypt your data.
+
+                    To silence this warning, set the 'crypt.warned' field
+                    in your configuration file to 'true'.
+
+                """
+                ),
+                err=True,
+            )
