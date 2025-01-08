@@ -1,5 +1,6 @@
 from codecs import encode
-from secrets import token_hex
+from secrets import choice, token_hex
+from string import ascii_letters, digits
 from sys import stdin, stdout
 from textwrap import dedent
 
@@ -23,8 +24,13 @@ def crypt_random_hex(length: int) -> str:
     return token_hex(length)
 
 
-def crypt_random_pw() -> str:
-    return "crypt_random_pw: Not yet implemented"
+def crypt_random_pw(length: int) -> str:
+    valid_punctuation = "-_.@#$%&*+=:"
+    alphabet = ascii_letters + digits + valid_punctuation
+    pwd = choice(digits)
+    pwd += "".join(choice(alphabet) for i in range(length - 2))
+    pwd += choice(valid_punctuation)
+    return pwd
 
 
 def crypt_simple_decrypt() -> None:

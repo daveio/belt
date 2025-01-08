@@ -92,8 +92,9 @@ def hex(length: int) -> None:
 
 
 @random.command()
-def pw() -> None:
-    click.echo(crypt_random_pw())
+@click.argument("length", nargs=1, type=int, required=False, default=16)
+def pw(length: int) -> None:
+    click.echo(crypt_random_pw(length))
 
 
 @crypt.group()
