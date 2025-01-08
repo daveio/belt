@@ -38,9 +38,11 @@ pip install belt-cli
 
 ### Generating Configuration
 
-If no config exists, a sample config (with random key) containing defaults is generated when you first run `belt`.
+To generate an initial configuration file containing defaults and a random key, run `belt init`. If a configuration file exists,`belt` will warn you and request confirmation.
 
-If you want to be explicit about it you can run `belt init`, which will **overwrite any existing config and keys**. `belt` will warn you and request confirmation if an existing config exists.
+You can also give permission to overwrite existing configuration with the `-o` or `--overwrite` flag.
+
+````shell
 
 ### Sample Configuration
 
@@ -52,7 +54,7 @@ crypt:
 dns:
   server: 1.1.1.1
   root: false
-```
+````
 
 ## Key Management
 
