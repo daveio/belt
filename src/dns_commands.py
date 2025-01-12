@@ -1,3 +1,9 @@
+from platform import system
+
+# trunk-ignore(bandit/B404)
+from subprocess import CalledProcessError, run
+
+from click import echo
 from dns.resolver import resolve_at
 
 
@@ -11,4 +17,27 @@ def dns_sec() -> str:
 
 
 def dns_flush() -> str:
-    return "dns_flush: Not yet implemented"
+    commands = {
+        "windows": "ipconfig /flushdns",
+        "darwin": "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder",
+        "linux": "sudo systemd-resolve --flush-caches",
+    }
+    os_name = system().lower()
+    try:
+        if os_name in commands.keys():
+            if os_name == "darwin":
+                real_os_name = "Darwin (macOS)"
+            else:
+                real_os_name = os_name.capitalize()
+            echo(f"{real_os_name} detected, executing: {commands[os_name]}", err=True)
+            result = run(
+                commands[os_name],
+                shell=True,  # trunk-ignore(bandit/B602): hardcoded commands
+                capture_output=True,
+                text=True,
+            )
+            echo(f"DNS cache flushed successfully.\n{result.stdout}", err=True)
+        else:
+            echo(f"Unsupported operating system: {os_name}", err=True)
+    except CalledProcessError as e:
+        echo(f"Error flushing DNS cache: {e.stderr}", err=True)

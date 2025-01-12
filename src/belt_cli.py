@@ -135,7 +135,7 @@ def wireguard(script: bool) -> None:
 
 @dns.command()
 def flush() -> None:
-    click.echo(dns_flush())
+    dns_flush()
 
 
 @dns.command()

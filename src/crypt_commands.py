@@ -56,16 +56,16 @@ def crypt_wireguard(script: bool) -> str:
     priv_format = serialization.PrivateFormat.Raw
     pub_format = serialization.PublicFormat.Raw
     private_key = X25519PrivateKey.generate()
-    private_bytes: bytes = private_key.private_bytes(
+    private_bytes = private_key.private_bytes(
         encoding=encoding,
         format=priv_format,
         encryption_algorithm=serialization.NoEncryption(),
     )
-    private_text: str = encode(private_bytes, "base64").decode("utf8").strip()
-    public_bytes: bytes = private_key.public_key().public_bytes(
+    private_text = encode(private_bytes, "base64").decode("utf8").strip()
+    public_bytes = private_key.public_key().public_bytes(
         encoding=encoding, format=pub_format
     )
-    public_text: str = encode(public_bytes, "base64").decode("utf8").strip()
+    public_text = encode(public_bytes, "base64").decode("utf8").strip()
     keypair = WireguardKeypair(private_text, public_text)
     if script:
         return f"{keypair.private} {keypair.public}"

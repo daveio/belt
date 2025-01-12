@@ -1,6 +1,6 @@
 [build-system]
 build-backend = "poetry.core.masonry.api"
-requires = ["poetry-core>=2.0.0"]
+requires = ["poetry-core>=2.0.1"]
 
 [project]
 authors = [{ email = "dave@dave.io", name = "Dave Williams" }]
@@ -19,7 +19,7 @@ dependencies = [
   "cryptography >= 44.0.0",
   "dnspython >= 2.7.0",
   "mutagen >= 1.47.0",
-  "poetry >= 2.0.0",
+  "poetry >= 2.0.1",
   "poetry-plugin-shell >= 1.0.1",
   "putio-py >= 8.7.0",
   "pytz >= 2024.2",
