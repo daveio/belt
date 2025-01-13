@@ -100,7 +100,7 @@ Path: `~/.config/belt/config.json`
   - Cipher list and order
   - Certificate generation
     - All features for client or server certificate
-    - Self signed
+    - Self-signed
     - Certificate request
 - Cryptography
   - Simple encrypt/decrypt
@@ -117,7 +117,7 @@ Path: `~/.config/belt/config.json`
   - Time to expiry from WHOIS
   - Nameserver lookup from WHOIS
 - Audio files
-  - Get sample rate and bit depth
+  - Get sample rate and bit-depth
 
 ### Planned
 

@@ -18,9 +18,9 @@ class Cryptor:
         nonce = urandom(12)
         hasher = Hash(BLAKE2b(digest_size=64))
         hasher.update(plaintext)
-        hash = hasher.finalize()
-        encrypted = algo.encrypt(nonce, plaintext, hash)
-        out = nonce + hash + encrypted
+        data_hash = hasher.finalize()
+        encrypted = algo.encrypt(nonce, plaintext, data_hash)
+        out = nonce + data_hash + encrypted
         if wrap:
             return Cryptor.wrap(out)
         else:
@@ -31,19 +31,19 @@ class Cryptor:
             ciphertext = Cryptor.unwrap(ciphertext)
         algo = ChaCha20Poly1305(self.key)
         nonce = ciphertext[:12]
-        hash = ciphertext[12:76]
+        data_hash = ciphertext[12:76]
         document = ciphertext[76:]
-        decrypted = algo.decrypt(nonce, document, hash)
+        decrypted = algo.decrypt(nonce, document, data_hash)
         hasher = Hash(BLAKE2b(digest_size=64))
         hasher.update(decrypted)
         calculated_hash = hasher.finalize()
-        if calculated_hash == hash:
+        if calculated_hash == data_hash:
             if stringify:
                 return decrypted.decode("utf-8")
             else:
                 return decrypted
         else:
-            return ValueError("Invalid ciphertext")
+            raise ValueError("Invalid ciphertext")
 
     def keygen(raw: bool) -> bytes | str:
         key = ChaCha20Poly1305.generate_key()

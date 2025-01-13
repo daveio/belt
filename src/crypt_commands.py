@@ -28,7 +28,7 @@ def crypt_random_pw(length: int) -> str:
     valid_punctuation = "-_.@#$%&*+=:"
     alphabet = ascii_letters + digits + valid_punctuation
     pwd = choice(digits)
-    pwd += "".join(choice(alphabet) for i in range(length - 2))
+    pwd += "".join(choice(alphabet) for _ in range(length - 2))
     pwd += choice(valid_punctuation)
     return pwd
 

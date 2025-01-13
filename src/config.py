@@ -53,16 +53,15 @@ def get_config() -> dict:
     return config
 
 
-def get_key() -> str:
+def get_key() -> str | None:
     config = get_config()
     env = config.get("crypt").get("env")
+    key = None
     if env:
         key = getenv(env)
     if key is None:
         key = config.get("crypt").get("key")
-    if key:
-        return key
-    return None
+    return key
 
 
 def get_warned() -> bool:
@@ -74,14 +73,13 @@ def get_warned() -> bool:
 
 
 def get_default_config_yaml() -> str:
-    print("get_default_config_yaml")
     return dedent(
         f"""
             # Example configuration file for Belt
             #
             # crypt:
             #   env:    # Environment variable containing the key to use for encryption/decryption
-            #           # This supercedes any key specified in the 'key' field
+            #           # This supersedes any key specified in the 'key' field
             #   key:    # Key to use for encryption/decryption
             #   warned: # Whether the user has been warned about the consequences of losing the key
             # dns:

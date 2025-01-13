@@ -4,7 +4,12 @@ from platform import system
 from subprocess import CalledProcessError, run
 
 from click import echo
-from dns.resolver import resolve_at
+from dns.dnssec import ValidationFailure, validate
+from dns.message import make_query
+from dns.name import from_text
+from dns.query import udp
+from dns.rdatatype import DNSKEY, NS, A
+from dns.resolver import resolve, resolve_at
 
 
 def dns_lookup(query: str, record_type: str, server: str, root: bool) -> str:
@@ -13,10 +18,27 @@ def dns_lookup(query: str, record_type: str, server: str, root: bool) -> str:
 
 
 def dns_sec() -> str:
-    return "dns_sec: Not yet implemented"
+    response = resolve("dave.io", NS)
+    nsname = response.rrset[0].to_text()  # name
+    response = resolve(nsname, A)
+    nsaddr = response.rrset[0].to_text()  # IPv4
+    request = make_query("dave.io", DNSKEY, want_dnssec=True)
+    response = udp(request, nsaddr)
+    if response.rcode() != 0:
+        return "QUERY FAILED (SERVER ERROR OR NO DNSKEY RECORD)"
+    answer = response.answer  # two RRSET: DNSKEY and RRSIG(DNSKEY)
+    if len(answer) != 2:
+        return "SOMETHING WENT WRONG"
+    name = from_text("dave.io")
+    try:
+        validate(answer[0], answer[1], {name: answer[0]})
+    except ValidationFailure:
+        return "DNSKEY VALIDATION FAILED"
+    else:
+        return "DNSKEY VALIDATED OK"
 
 
-def dns_flush() -> str:
+def dns_flush() -> None:
     commands = {
         "windows": "ipconfig /flushdns",
         "darwin": "sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder",
