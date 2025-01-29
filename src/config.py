@@ -11,15 +11,12 @@ from cryptor import Cryptor
 
 def get_config() -> dict:
     config_path = get_config_path()
-
     if not config_path.is_file():
         echo("No config file found. Run 'belt init' to create a new one.")
         raise Abort()
     with open(config_path, "r") as file:
         yaml = safe_load(file)
-
     config = {}
-
     if yaml.get("crypt"):
         config["crypt"] = {}
         if yaml["crypt"].get("env"):
@@ -36,7 +33,6 @@ def get_config() -> dict:
             config["crypt"]["warned"] = False
     else:
         config["crypt"] = {"env": None, "key": None, "warned": False}
-
     if yaml.get("dns"):
         config["dns"] = {}
         if yaml["dns"].get("server"):
@@ -49,7 +45,6 @@ def get_config() -> dict:
             config["dns"]["root"] = False
     else:
         config["dns"] = {"server": None, "root": False}
-
     return config
 
 
